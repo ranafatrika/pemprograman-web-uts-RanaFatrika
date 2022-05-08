@@ -119,7 +119,7 @@ export default {
       <h1 class="namasurah text-start text-center" v-if="chapter">{{chapter.name_arabic}}
         <br>{{chapter.verses_count}} Ayat</h1>
       <hr>
-      <p class="info" v-if="chapter_info">{{chapter_info.text}}</p>
+
       <div class="bismilah text-center mt-5">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْم </div>
       <p v-if="audio_file" class="has-text-end">
         <audio controls>

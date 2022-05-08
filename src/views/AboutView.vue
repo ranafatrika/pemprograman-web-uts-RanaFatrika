@@ -15,7 +15,7 @@ import Navbar from "../components/Navbar.vue";
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="src/assets/rana.jpg" class="d-block w-100" alt="1">
+          <img src="src/assets/al6.jpg" class="d-block w-100" alt="1">
         </div>
         <div class="carousel-item">
           <img src="src/assets/rana1.png" class="d-block w-100" alt="2">
