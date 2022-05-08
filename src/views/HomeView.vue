@@ -16,7 +16,7 @@ import Navbar from "../components/Navbar.vue";
             <p>
               بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
             </p>
-            <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Al Qur'an" href ="/ayat Al-qur'an">
+            <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Al Qur'an" href ="">
               Mulai
             </button>
             <div class="ratio ratio-16x9">

@@ -4,19 +4,19 @@ import Navbar from "../components/Navbar.vue";
 <script>
 
 export default {
-  name: "Al Fatihah",
+  name: "Al Naba",
   data(){
     return{
       chapter: null,
       verses: [],
       translations: [],
       audio_file: null,
-
+      chapter_info:null,
     }
   },
   methods: {
     getChapter(){
-      fetch('https://api.quran.com/api/v4/chapters/1?language=id',{
+      fetch('https://api.quran.com/api/v4/chapters/78?language=id',{
         method: 'GET'
       })
           .then(response => {
@@ -29,7 +29,7 @@ export default {
           })
     },
     getVerses(){
-      fetch('https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=1&juz_number=1', {
+      fetch('https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=78&juz_number=30', {
         method: 'GET'
       })
           .then(res =>{
@@ -42,7 +42,7 @@ export default {
           })
     },
     getTranslate() {
-      fetch('https://api.quran.com/api/v4/quran/translations/33?chapter_number=1&juz_number=1', {
+      fetch('https://api.quran.com/api/v4/quran/translations/33?chapter_number=78&juz_number=30', {
         method: 'GET'
       })
           .then(response => {
@@ -55,7 +55,7 @@ export default {
           });
     },
     getAudio() {
-      fetch('https://api.quran.com/api/v4/chapter_recitations/5/1', {
+      fetch('https://api.quran.com/api/v4/chapter_recitations/4/78', {
         method: 'GET'
       })
           .then(response => {
@@ -72,7 +72,7 @@ export default {
     },
 
     getInfo() {
-      fetch('https://api.quran.com/api/v4/chapters/1/info?language=id', {
+      fetch('https://api.quran.com/api/v4/chapters/78/info?language=id', {
         method: 'GET'
       })
           .then(response => {
@@ -84,89 +84,10 @@ export default {
             this.chapter_info=json.chapter_info;
           });
     },
+
   },
 
-  name1: "Al Baqarah",
-  data1(){
-    return{
-      chapter: null,
-      verses: [],
-      translations: [],
-      audio_file: null,
 
-    }
-  },
-  methods1: {
-    getChapter(){
-      fetch('https://api.quran.com/api/v4/chapters/2?language=id',{
-        method: 'GET'
-      })
-          .then(response => {
-            if(response.ok){
-              return response.json();
-            }
-          })
-          .then(json => {
-            this.chapter = json.chapter;
-          })
-    },
-    getVerses(){
-      fetch('https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=2&juz_number=1', {
-        method: 'GET'
-      })
-          .then(res =>{
-            if(res.ok){
-              return res.json()
-            }
-          })
-          .then(json => {
-            this.verses = json.verses;
-          })
-    },
-    getTranslate() {
-      fetch('https://api.quran.com/api/v4/quran/translations/33?chapter_number=2&juz_number=1', {
-        method: 'GET'
-      })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then(json => {
-            this.translations = json.translations;
-          });
-    },
-    getAudio() {
-      fetch('https://api.quran.com/api/v4/chapter_recitations/5/2', {
-        method: 'GET'
-      })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then(json => {
-            //console.log(json)
-            this.audio_file = json.audio_file;
-            //this.audio_file = this.getAudio(audio_file.audio.url);
-
-          });
-    },
-
-    getInfo() {
-      fetch('https://api.quran.com/api/v4/chapters/2/info?language=id', {
-        method: 'GET'
-      })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then(json => {
-            this.chapter_info=json.chapter_info;
-          });
-    },
-  },
 
   mounted() {
     this.getChapter();
@@ -177,32 +98,30 @@ export default {
 
   }
 }
-
 </script>
 
 <template>
   <main>
     <Navbar/>
-    <section>
+    <section class="heeder ">
       <div class="atas"></div>
       <div class="text">
-           <div class="title text-black text-center">
-           QS. Al Fatihah (Pembuka)
-      </div>
-
-        <p class="subtitle text-center text-black bg-primary">
-          Surah ke 1
+        <p class="title text-black">
+          QS. An Naba (Berita Besar)
+        </p>
+        <p class="subtitle text-center text-black">
+          Surah ke 78
         </p>
       </div>
     </section>
-    <div class="namasurah text-center" v-if="chapter">{{chapter.name_arabic}}
-      <br>{{chapter.verses_count}} Ayat</div>
-    <div class="bismilah text-center bg-primary text-black mt-5">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْم </div>
     <hr>
     <section>
-
+      <h1 class="namasurah text-start text-center" v-if="chapter">{{chapter.name_arabic}}
+        <br>{{chapter.verses_count}} Ayat</h1>
       <hr>
-      <p v-if="audio_file" class="has-text-right">
+      <p class="info" v-if="chapter_info">{{chapter_info.text}}</p>
+      <div class="bismilah text-center mt-5">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْم </div>
+      <p v-if="audio_file" class="has-text-end">
         <audio controls>
           <source :src=audio_file.audio_url type="audio/mpeg">
           Your browser does not support the audio element.
@@ -215,46 +134,7 @@ export default {
         </p>
         <hr>
       </div>
-      <div v-for="translations in translations">
-        <p class="translate text-start">
-         {{translations.text}}
-        </p>
-        <hr>
-      </div>
-
-    </section>
-    <section class="header">
-      <div class="atas"></div>
-      <div class="text">
-        <div class="title text-black text-center">
-          QS. Al Baqarah (Sapi Betina)
-        </div>
-
-        <p class="subtitle text-center text-black bg-primary">
-          Surah ke 2
-        </p>
-      </div>
-    </section>
-    <div class="namasurah text-center" v-if="chapter">{{chapter.name_arabic}}
-      <br>{{chapter.verses_count}} Ayat</div>
-    <div class="bismilah text-center bg-primary text-black mt-5">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْم </div>
-    <hr>
-    <section>
-
-      <hr>
-      <p v-if="audio_file" class="has-text-right">
-        <audio controls>
-          <source :src=audio_file.audio_url type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </p>
-      <hr>
-      <div v-for="verse in verses">
-        <p class="ayat text-end">
-          {{verse.text_uthmani}} {{verse.verse_key}}
-        </p>
-        <hr>
-      </div>
+      <h2 class="arti text-center">Terjemahan : </h2>
       <div v-for="translations in translations">
         <p class="translate text-start">
           {{translations.text}}
@@ -264,37 +144,15 @@ export default {
 
     </section>
   </main>
+
 </template>
-<!--Get Chapter-->
-<!--Get Uthmani Script of ayah-->
-<!--Get a single translation-->
-<!--Get single Surah audio for specific reciter-->
-<!--Chapter Info-->
-
-
 <style>
-.text-end{
-  margin-right: 20px;
-}
-.namasurah{
-  margin-left: 20px;
-  font-weight: bold;
-  font-size: 35px;
-}
 
-.translate{
-  font-weight: bold;
-  font-family: "Times New Roman";
-  font-size: 20px;
-}
 .ayat{
   font-weight: bold;
   font-size: 25px;
 }
 .heeder{
-  height: 50vh;
-  background-image: url("src/assets/al6.jpg");
-  background-size: cover;
   position: relative;
   display: flex;
   justify-content: center;
@@ -311,7 +169,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(231, 169, 0, 0.4);
+  background-color: #87cefa;
 }
 .text{
   margin-top: 3rem;
@@ -320,12 +178,15 @@ export default {
   border: 4px solid #000000;
   font-size: 35px;
 }
-.info{
-  background-color: rgb(231, 169, 0, 0.4);
-}
+
 .bismilah{
   font-weight: bold;
   font-size: 30px;
-  background-color: #e7a900;
+  background-color: #87cefa;
+}
+.arti{
+  font-weight: bold;
+  font-size: 30px;
+  background-color: #87cefa;
 }
 </style>

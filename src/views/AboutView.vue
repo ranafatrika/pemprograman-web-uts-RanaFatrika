@@ -6,11 +6,27 @@ import Navbar from "../components/Navbar.vue";
 <template>
  <navbar />
   <section class="tentang">
-    <div class="about">
-      <h1>About Me</h1>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="src/assets/rana.jpg" class="d-block w-100" alt="1">
+        </div>
+        <div class="carousel-item">
+          <img src="src/assets/rana1.png" class="d-block w-100" alt="2">
+        </div>
+        <div class="carousel-item">
+          <img src="src/assets/rana2.png" class="d-block w-100" alt="3">
+        </div>
+      </div>
     </div>
   </section>
-  <div class="accordion accordion-flush bg-light" id="accordionFlushExample">
+  <div class="accordion accordion-flush bg-light mt-5" id="accordionFlushExample">
     <div class="accordion-item bg-light">
       <h2 class="accordion-header" id="flush-headingOne">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -34,14 +50,6 @@ import Navbar from "../components/Navbar.vue";
 }
 .tentang{
   background: #87cefa;
-}
-.tentang h1{
-  padding: 20px;
-  flex-grow: 1;
-  flex-shrink: 0;
-  margin-top: 2rem;
-  text-align: center;
-  font-family: monospace;
 }
 .accordion-button{
   text-align: center;
